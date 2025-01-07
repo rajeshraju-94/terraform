@@ -1,9 +1,10 @@
-resource "aws_security_group" "allow_all_ssh" {
-    name = "allow_all_terraform"
+resource "aws_security_group" "sample" {
+    name = "allow-all-terraform"
+    description = "allow all IPs for 22 port"
 
     ingress {
         from_port        = 22
-        to_port          = 0
+        to_port          = 22
         protocol         = "tcp"
         cidr_blocks      = ["0.0.0.0/0"]
         ipv6_cidr_blocks = ["::/0"]
@@ -17,4 +18,17 @@ resource "aws_security_group" "allow_all_ssh" {
         ipv6_cidr_blocks = ["::/0"]
 
     }
+    tags = {
+        Name = "terraform-sg"
+    }
+}
+
+resource "aws_instance" "terraform1" {
+    ami = "ami-09c813fb71547fc4f"
+    instance_type = "t2.micro"
+    vpc_security_group_ids = [aws_security_group.sample.id]
+    
+    tags = {
+    Name = "terraform-instance"
+}
 }
