@@ -1,7 +1,6 @@
 resource "aws_security_group" "sample" {
-    name = "allow-all-terraform"
+    name = "terraform-sg"
     description = "allow all IPs for 22 port"
-
     ingress {
         from_port        = 22
         to_port          = 22
@@ -23,11 +22,10 @@ resource "aws_security_group" "sample" {
     }
 }
 
-resource "aws_instance" "terraform1" {
-    ami = "ami-09c813fb71547fc4f"
+resource "aws_instance" "terraform-instance" {
+    ami = "ami-05c179eced2eb9b5b"
     instance_type = "t2.micro"
     vpc_security_group_ids = [aws_security_group.sample.id]
-    
     tags = {
     Name = "terraform-instance"
 }
