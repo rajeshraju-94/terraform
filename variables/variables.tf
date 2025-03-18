@@ -12,7 +12,7 @@ variable protocol {
 }
 variable ingress_cidr {
     type = list(string)
-    default = default = ["0.0.0.0/0"]
+    default = ["0.0.0.0/0"]
 }
 variable "tags" {
     type = map #optional
@@ -24,7 +24,7 @@ variable "tags" {
         Terraform = "true"
     }
 }
-variable ami ={
+variable ami {
     type = string
     default = "ami-05c179eced2eb9b5b"
 }
