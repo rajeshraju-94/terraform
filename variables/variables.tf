@@ -1,43 +1,53 @@
-# 1. command line
-# 2. terraform.tfvars
-# 3. environment variables, TF_VAR_your_variable_name
-# 4. default
-# 5. prompt
-variable from_port {
+/* 
+1. command line
+ terraform apply -var="image_id=ami-abc123"
+ terraform apply -var="instance_type=t3.large"
+ terraform apply -var-file="testing.tfvars"
+2. terraform.tfvars
+instance_type = "t3.small"
+3. environment variables, 
+export TF_VAR_instance_type=t3.medium
+terraform plan
+to unset => unset TF_VAR_instance_type
+4. default
+5. prompt 
+*/
+variable "from_port" {
   type        = number
   default     = 0
 }
-variable to_port {
+variable "to_port" {
   type        = number
   default     = 0
 }
-variable protocol {
+variable "protocol" {
     type = string
     default = "tcp"
 }
-variable ingress_cidr {
+variable "ingress_cidr" {
     type = list(string)
     default = ["0.0.0.0/0"]
 }
 variable "tags" {
     type = map #optional
     default = {
-        Name = "terraform-test"
-        Project = "tt"
-        Component = "test"
+        Name = "terraform-variable"
+        Project = "test"
+        Component = "ec2"
         Environment = "DEV"
         Terraform = "true"
     }
 }
-variable ami {
+variable "ami" {
     type = string
     default = "ami-05c179eced2eb9b5b"
 }
-variable instance_type {
+variable "instance_type" {
     type = string
     default = "t2.micro"
 }
-variable security_group {
+variable "security_group" {
     type = string
     default = "terraform-sg"
 }
+
