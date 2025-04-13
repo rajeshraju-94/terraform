@@ -15,7 +15,7 @@ terraform {
   */
   backend "s3" {
     bucket = "devops-81s-remotestate"
-    key    = "for-each-demo"
+    key    = "remote-state-demo"
     region = "ap-south-1"
     dynamodb_table = "devops-81s-locking"
   }
